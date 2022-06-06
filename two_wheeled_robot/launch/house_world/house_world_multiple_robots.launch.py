@@ -34,20 +34,21 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     package_name = 'two_wheeled_robot'
-    default_launch_dir = 'launch'
+    default_launch_dir = 'launch/house_world'
 
 
     # Get the launch directory
     # bringup_dir = get_package_share_directory('nav2_bringup')
     # launch_dir = os.path.join(bringup_dir, 'launch')
-    pkg_share = FindPackageShare(package=package_name).find(package_name)
+    # pkg_share = FindPackageShare(package=package_name).find(package_name)
+    pkg_share =  get_package_share_directory(package_name)
     default_launch_dir = os.path.join(pkg_share, default_launch_dir)
 
     # Names and poses of the robots
     robots = [
         {'name': 'robot1', 'x_pose': 0.0, 'y_pose': 0.0, 'z_pose': 0.25,
                            'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0},
-        {'name': 'robot2', 'x_pose': 0.0, 'y_pose': 1.0, 'z_pose': 0.25,
+        {'name': 'robot2', 'x_pose': 0.0, 'y_pose': 2.0, 'z_pose': 0.25,
                            'roll': 0.0, 'pitch': 0.0, 'yaw': 0.0}]
 
     # DEFINE ARGUMENTS
@@ -97,7 +98,7 @@ def generate_launch_description():
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config',
-        default_value=os.path.join(pkg_share, 'rviz/house_world', 'nav2_namespaced_view.rviz'),
+        default_value=os.path.join(pkg_share, 'rviz/house_world', 'nav2_config_multiple_robots.rviz'),
         description='Full path to the RVIZ config file to use.')
 
     declare_use_robot_state_pub_cmd = DeclareLaunchArgument(
@@ -124,7 +125,7 @@ def generate_launch_description():
         group = GroupAction([
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
-                        os.path.join(default_launch_dir, 'rviz_launch.py')),
+                        os.path.join(default_launch_dir, 'house_world_rviz.launch.py')),
                 condition=IfCondition(use_rviz),
                 launch_arguments={
                                   'namespace': TextSubstitution(text=robot['name']),
@@ -133,8 +134,8 @@ def generate_launch_description():
 
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(os.path.join(pkg_share,
-                                                           'launch',
-                                                           'tb3_simulation_launch.py')),
+                                                           'launch/house_world',
+                                                           'house_world_single_robot.launch.py')),
                 launch_arguments={'namespace': robot['name'],
                                   'use_namespace': 'True',
                                   'map': map_yaml_file,
