@@ -37,6 +37,7 @@ setup(
     entry_points={
         'console_scripts': [
             'object_following = object_following_robot.object_following:main',
+            'publisher_subscriber = object_following_robot.publisher_subscriber:main',
         ],
     },
 )

@@ -41,7 +41,7 @@ def generate_launch_description():
     # Names and poses of the robots
     robots = [
         {'name': 'robot1', 'x_pose': 0.0, 'y_pose': 0.0, 'z_pose': 0.25}, #
-        {'name': 'robot2', 'x_pose': 0.0, 'y_pose': 2.0, 'z_pose': 0.25}]
+        {'name': 'robot2', 'x_pose': 0.0, 'y_pose': 1.0, 'z_pose': 0.25}]
 
     # Simulation settings
     world = LaunchConfiguration('world')
@@ -152,7 +152,7 @@ def generate_launch_description():
                                   'y_pose': TextSubstitution(text=str(robot['y_pose'])),
                                   'z_pose': TextSubstitution(text=str(robot['z_pose'])),
                                   'robot_name': robot['name'], # passa il nome del robot
-                                  'turtlebot_type': TextSubstitution(text='waffle') # passa il tipo di turtlebot
+                                  #'turtlebot_type': TextSubstitution(text='waffle') # passa il tipo di turtlebot
                                   }.items()))
 
     # Define commands for launching the navigation instances
