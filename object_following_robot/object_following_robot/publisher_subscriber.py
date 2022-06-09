@@ -52,13 +52,13 @@ class PublisherSubscriber(Node):
         self.q1 = msg.pose.pose.orientation.x
         self.q2 = msg.pose.pose.orientation.y
         self.q3 = msg.pose.pose.orientation.z
-        self.get_logger().info('I heard: "%f"' % self.x)
-        self.get_logger().info('I heard: "%f"' % self.y)
-        self.get_logger().info('I heard: "%f"' % self.z)
-        self.get_logger().info('I heard: "%f"' % self.q0)
-        self.get_logger().info('I heard: "%f"' % self.q1)
-        self.get_logger().info('I heard: "%f"' % self.q2)
-        self.get_logger().info('I heard: "%f"' % self.q3)
+        # self.get_logger().info('I heard: "%f"' % self.x)
+        # self.get_logger().info('I heard: "%f"' % self.y)
+        # self.get_logger().info('I heard: "%f"' % self.z)
+        # self.get_logger().info('I heard: "%f"' % self.q0)
+        # self.get_logger().info('I heard: "%f"' % self.q1)
+        # self.get_logger().info('I heard: "%f"' % self.q2)
+        # self.get_logger().info('I heard: "%f"' % self.q3)
 
 
     def timer_callback(self):
@@ -73,13 +73,14 @@ class PublisherSubscriber(Node):
         goal_msg.pose.orientation.y = self.q2
         goal_msg.pose.orientation.z = self.q3
         self.publisher_.publish(goal_msg)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.position.x)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.position.y)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.position.z)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.orientation.w)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.orientation.x)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.orientation.y)
-        self.get_logger().info('---Publishing: "%f"' % goal_msg.pose.orientation.z)
+        self.get_logger().info('\033[91m' + 'Publishing:'  + '\033[0m')
+        self.get_logger().info('--- position - x: "%f"' % goal_msg.pose.position.x)
+        self.get_logger().info('--- position - y: "%f"' % goal_msg.pose.position.y)
+        self.get_logger().info('--- position - z: "%f"' % goal_msg.pose.position.z)
+        self.get_logger().info('--- orientation - w: "%f"' % goal_msg.pose.orientation.w)
+        self.get_logger().info('--- orientation - x: "%f"' % goal_msg.pose.orientation.x)
+        self.get_logger().info('--- orientation - y: "%f"' % goal_msg.pose.orientation.y)
+        self.get_logger().info('--- orientation - z: "%f"' % goal_msg.pose.orientation.z)
 
 
 def main(args=None):
