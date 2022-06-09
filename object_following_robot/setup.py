@@ -38,6 +38,8 @@ setup(
         'console_scripts': [
             'object_following = object_following_robot.object_following:main',
             'publisher_subscriber = object_following_robot.publisher_subscriber:main',
+            'basefootprint_frame_listener = object_following_robot.basefootprint_frame_listener:main',
+            'robot2_pose_publisher = object_following_robot.robot2_pose_publisher:main'
         ],
     },
 )

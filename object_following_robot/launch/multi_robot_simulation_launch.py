@@ -132,6 +132,27 @@ def generate_launch_description():
                                      '-s', 'libgazebo_ros_factory.so', world],
         output='screen')
 
+    # # Start basefootprint_listener node to get the transformation between <map> and <base_footprint>
+    # start_basefootprint_listener_cmd = Node(
+    #     package='object_following_robot',
+    #     executable='basefootprint_frame_listener',
+    #     namespace='robot2',
+    #     output='screen',
+    #     prefix='xterm -e',
+    #     remappings= [('/tf', '/robot2/tf'), ('/tf_static', '/robot2/tf_static')]
+    # )
+
+    # Start robot2_pose_publisher node to publish the transformation between <map> and <robot2/base_footprint> on the goal_pose topic
+    start_robot2_pose_publisher_cmd = Node(
+        package='object_following_robot',
+        executable='robot2_pose_publisher',
+        namespace='robot2',
+        output='screen',
+        prefix='xterm -e',
+        remappings= [('/tf', '/robot2/tf'), ('/tf_static', '/robot2/tf_static')]
+    )
+
+    # Start teleop_twist_keyboard node
     start_teleop_twist_keyboard_cmd = Node( #
         package='teleop_twist_keyboard',
         executable='teleop_twist_keyboard',
@@ -221,7 +242,13 @@ def generate_launch_description():
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)
 
-    # Start teleop twist keyboard
+    # # Start basefootprint_frame_listener node
+    # ld.add_action(start_basefootprint_listener_cmd)
+
+    # Start robot2_pose_publisher node
+    ld.add_action(start_robot2_pose_publisher_cmd)
+
+    # Start teleop twist keyboard node
     ld.add_action(start_teleop_twist_keyboard_cmd)
 
     # Add the actions to start gazebo, robots and simulations
